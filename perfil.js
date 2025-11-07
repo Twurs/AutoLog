@@ -30,33 +30,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnModalSi = document.getElementById('btn-modal-si');
     const btnModalNo = document.getElementById('btn-modal-no');
 
-    // =======================================================
-    // --- LÓGICA DE LOGIN (SIMULADO CON LOCALSTORAGE) ---
-    // =======================================================
 
-    /**
-     * Revisa si hay un usuario en localStorage y muestra la
-     * sección correcta. Se llama al cargar la página.
-     */
+    // Revisa si hay un usuario en localStorage y muestra la sección correcta. Se llama al cargar la página.
     function checkLoginState() {
         const usuarioSimulado = localStorage.getItem('autologUser');
         
         if (usuarioSimulado) {
-            // --- Usuario SÍ está logueado ---
+            // Usuario SÍ está logueado
             zonaLogin.style.display = 'none';
             zonaPerfil.style.display = 'block';
 
-            // Actualizamos el título del garage
             const userDisplay = document.querySelector('#zona-perfil .perfil-header h2');
             if (userDisplay) {
                 userDisplay.textContent = `Garage de ${usuarioSimulado}`;
             }
             
             cargarFabricantes();
-            cargarGarageDesdeLocalStorage(); // <-- Carga el garage guardado
+            cargarGarageDesdeLocalStorage();
 
         } else {
-            // --- Usuario NO está logueado ---
+            // Usuario NO está logueado
             zonaLogin.style.display = 'block';
             zonaPerfil.style.display = 'none';
         }
@@ -79,14 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Por favor, ingresá un email.');
             return;
         }
-        // En la simulación, registrarse e iniciar sesión es lo mismo
         localStorage.setItem('autologUser', email);
         checkLoginState();
     });
 
     btnLogout.addEventListener('click', () => {
         localStorage.removeItem('autologUser');
-        // Opcional: también borramos el garage al cerrar sesión
         localStorage.removeItem('autologGarage');
         
         // Limpiamos todo
@@ -99,13 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // =======================================================
-    // --- LÓGICA DE GARAGE (SIMULADO CON LOCALSTORAGE) ---
-    // =======================================================
 
-    /**
-     * Carga el garage guardado desde localStorage al iniciar la app.
-     */
+    // Carga el garage guardado desde localStorage al iniciar la app.
     function cargarGarageDesdeLocalStorage() {
         const garageGuardado = JSON.parse(localStorage.getItem('autologGarage'));
         
@@ -121,27 +107,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Guarda el array completo del garage en localStorage.
-     */
+    // Guarda el array completo del garage en localStorage.
     function guardarGarageEnLocalStorage() {
         localStorage.setItem('autologGarage', JSON.stringify(garageUsuario));
     }
 
-    /**
-     * Agrega un vehículo al garage y lo guarda.
-     * Se llama cuando el usuario hace clic en "Añadir".
-     */
+    // Agrega un vehículo al garage y lo guarda.
+    // Se llama cuando el usuario hace clic en "Añadir".
     function agregarVehiculoAlGarage(vehiculoId) {
-        // 1. Encontramos el objeto completo del vehículo
         const vehiculo = vehiculosCargados.find(v => v.id === vehiculoId);
         if (!vehiculo) return;
 
-        // 2. Obtenemos los nombres
         const marcaNombre = selectFabricante.options[selectFabricante.selectedIndex].text;
         const modeloNombre = selectModelo.options[selectModelo.selectedIndex].text;
         
-        // 3. Creamos el objeto limpio para guardar
         const vehiculoParaGuardar = {
             id: vehiculo.id,
             foto_url: vehiculo.foto_url,
@@ -150,17 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
             version: `${vehiculo.ano} - ${vehiculo.motor}`
         };
 
-        // 4. Lo agregamos al array y lo guardamos
         garageUsuario.push(vehiculoParaGuardar);
         guardarGarageEnLocalStorage();
         
-        // 5. Lo mostramos en pantalla
         mostrarTarjetaVehiculo(vehiculoParaGuardar);
     }
 
-    /**
-     * Crea el HTML de la tarjeta y la muestra en el garage.
-     */
+    // Crea el HTML de la tarjeta y la muestra en el garage.
     function mostrarTarjetaVehiculo(vehiculo) {
         // Limpiamos el mensaje "Aún no tenés vehículos..."
         const pMensajeVacio = garageDiv.querySelector('p');
@@ -182,10 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         garageDiv.innerHTML += tarjetaHTML;
     }
-
-    // =======================================================
-    // --- LÓGICA DE FILTROS Y EVENTOS ---
-    // =======================================================
 
     // Listener para Fabricante
     selectFabricante.addEventListener('change', () => {
@@ -243,15 +214,12 @@ document.addEventListener('DOMContentLoaded', () => {
         btnAddVehiculo.disabled = true;
     });
 
-    // Listener de clics en el Garage (Seleccionar y Borrar)
     garageDiv.addEventListener('click', (e) => {
         
-        // --- LÓGICA DE ELIMINAR ---
         if (e.target.matches('.btn-eliminar-vehiculo')) {
             tarjetaParaBorrar = e.target.closest('.garage-card');
             modalConfirmar.classList.add('visible');
             
-        // --- LÓGICA DE SELECCIÓN ---
         } else {
             const tarjetaClickeada = e.target.closest('.garage-card');
             if (!tarjetaClickeada) return;
@@ -267,7 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             cargarTareas(vehiculoId);
             
-            // (Quitamos el scroll automático que no te gustaba)
         }
     });
 
@@ -301,13 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // =======================================================
-    // --- LÓGICA DE API (Fetch al Back-End) ---
-    // =======================================================
-
-    /**
-     * Carga Fabricantes
-     */
+    // Carga Fabricantes
     async function cargarFabricantes() {
         // ... (código de 'async function cargarFabricantes' sin cambios)
         console.log("Intentando cargar fabricantes desde la API...");
@@ -331,11 +292,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Carga Modelos
-     */
+    // Carga Modelos
     async function cargarModelos(fabricanteId) {
-        // ... (código de 'async function cargarModelos' sin cambios)
         console.log(`Cargando modelos para el fabricante ID: ${fabricanteId}`);
         try {
             const response = await fetch(`http://localhost:3000/api/modelos/${fabricanteId}`);
@@ -357,18 +315,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Carga Vehículos y los guarda en 'vehiculosCargados'
-     */
+    // Carga Vehículos y los guarda en 'vehiculosCargados'
     async function cargarVehiculos(modeloId) {
-        // ... (código de 'async function cargarVehiculos' sin cambios)
         console.log(`Cargando vehículos para el modelo ID: ${modeloId}`);
         try {
             const response = await fetch(`http://localhost:3000/api/vehiculos/${modeloId}`);
             if (!response.ok) throw new Error(`Error de red: ${response.statusText}`);
             const data = await response.json();
             
-            vehiculosCargados = data; // Guardamos los datos
+            vehiculosCargados = data;
             
             selectVehiculo.innerHTML = '<option value="">3. Elegí la versión...</option>';
             data.forEach(vehiculo => {
@@ -385,11 +340,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Carga Tareas (con animación y orden)
-     */
+    
+     // Carga Tareas
     async function cargarTareas(vehiculoId) {
-        // ... (código de 'async function cargarTareas' con la animación y el orden)
         console.log(`Cargando tareas para el vehículo ID: ${vehiculoId}`);
         
         if (listaDiv.innerHTML !== '') {
@@ -448,7 +401,6 @@ document.addEventListener('DOMContentLoaded', () => {
             listaDiv.innerHTML = html;
             listaDiv.style.opacity = 1;
 
-            // Agregamos el scroll retrasado que nos gustaba
             await new Promise(resolve => setTimeout(resolve, 500));
             listaDiv.scrollIntoView({ behavior: 'smooth' });
 
@@ -461,9 +413,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // =======================================================
-    // --- INICIO DE LA APP ---
-    // =======================================================
     
     // Llamamos a la única función que revisa el estado del login
     checkLoginState();

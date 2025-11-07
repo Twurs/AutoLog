@@ -1,0 +1,9 @@
+# Archivos del Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Claves Secretas de Firebase
+autolog-backend/clave-firebase.json
+
+# Dependencias del Back-end (Node.js)
+autolog-backend/node_modules/

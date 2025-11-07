@@ -1,0 +1,328 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 0 10px;
+}
+
+
+.container {
+    max-width: 900px;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+h1, h2 {
+    color: #005a9c;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+h1 {
+    font-size: 2em;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li{
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+}
+
+ul li::before {
+    content: 'check_circle';
+    font-family: 'Material Symbols Outlined';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: #28a745;
+    font-weight: normal;
+    font-size: 1.2em;
+    line-height: 1;
+
+}
+
+
+.info-section {
+    margin-bottom: 30px;
+}
+
+.cta-section {
+    text-align: center;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 15px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 450px;
+    margin: 30px auto;
+}
+
+#login-form label{
+    font-weight: bold;
+    margin-bottom: -5px;
+}
+
+input[type=email],
+input[type=password],
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/*Contenedor para los botones de login/registro*/
+.form-buttons {
+    display: flex;
+    gap: 10px; /*Espacio entre botones*/
+    margin-top: 10px;
+}
+
+.cta-button.secondary {
+    background-color: #6c757d;
+}
+.cta-button.secondary:hover {
+    background-color: #5a6268;
+}
+
+.cta-button.danger {
+    background-color: #dc3545;
+}
+
+.cta-button.danger:hover {
+    background-color: #c82333;
+}
+
+/*--- Estilos de la zona de perfil ---*/
+
+.perfil-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 30px 0;
+}
+
+.filtros-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.filtros-container select {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    width: 100%;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button:disabled:hover {
+    background-color: #ccc;
+    transform: none;
+}
+
+@media (min-width: 768px) {
+    .filtros-container select {
+        width: auto;
+    }
+
+    #select-fabricante {
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+
+    #select-modelo {
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+
+    #select-vehiculo {
+        flex-grow: 2;
+        flex-basis: 0;
+    }
+
+}
+
+#vehiculos-guardados {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.garage-card {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    width: 250px;
+    background-color: #fff;
+    transition: transform;
+}
+
+.garage-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+    transition: filter 0.3s ease;
+}
+
+.garage-card-info {
+    padding: 15px;
+}
+
+.garage-card-info strong {
+    font-size: 1.1em;
+    color: #005a9c;
+}
+
+.garage-card-info p {
+    margin: 5px 0 0;
+    color: #555;
+}
+
+.garage-card.selected {
+    border-color: #007bff;
+    box-shadow: 0 4px 12px rgba(0,123,255,0.25);
+}
+
+
+.btn-eliminar-vehiculo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5em;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.garage-card:hover .btn-eliminar-vehiculo {
+    opacity: 1;
+}
+
+.garage-card:hover img {
+    filter: blur(2px) brightness(0.7);
+    transition: filter 0.3s ease;
+}
+
+.modal-overlay {
+    /* Se oculta por defecto */
+    display: none; 
+    
+    /* Posicionamiento para cubrir la pantalla */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.visible {
+    display: flex;
+}
+
+
+.modal-contenido {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.modal-contenido h3 {
+    margin-top: 0;
+}
+
+
+.modal-botones {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.disclaimer {
+    font-size: 0.95em;
+    font-style: normal; 
+    color: #855300;
+    background-color: #fffbeb;
+    border-left: 5px solid #ffc107;
+    padding: 12px 15px;
+    margin: 15px 0 25px 0;
+}
+
+#lista-mantenimiento {
+    transition: opacity 0.5s ease;
+    min-height: 100px;
+}

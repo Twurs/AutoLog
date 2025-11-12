@@ -8,7 +8,8 @@ Esta es una aplicación web para la gestión de mantenimiento vehicular.
 
 1.  Navegar a la carpeta del back-end: `cd autolog-backend`
 2.  Instalar las dependencias: `npm install`
-3.  **Importante:** Este proyecto requiere una clave de servicio de Firebase. Coloque el archivo `clave-firebase.json` (recibido por privado) dentro de esta carpeta.
+3.  **Importante:** Este proyecto requiere una clave de servicio de Firebase. Coloque el archivo `clave-firebase.json` (recibido por privado) 
+dentro de esta carpeta.
 4.  Iniciar el servidor: `node server.js`
 
 ### 2. Front-End

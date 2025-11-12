@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 for (const nombreComponente in componentes) {
                     html += `<strong>${nombreComponente}</strong><ul>`;
                     componentes[nombreComponente].forEach(t => {
-                        html += `<li>${t.tarea} (Cada ${t.intervalo_km} km)</li>`;
+                        html += `<li>${t.tarea} (${t.intervalo_km})</li>`;
                     });
                     html += '</ul>';
                 }
